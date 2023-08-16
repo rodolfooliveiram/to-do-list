@@ -1,0 +1,23 @@
+.header {
+  background-color: var(--gray-700);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 3.5rem 0;
+}
+
+.header h1 {
+  color: var(--blue);
+  font-size: 2.5rem;
+  font-weight: 900;
+}
+
+.header h1 > span {
+  color: var(--purple-dark);
+}
+
+.container {
+  max-width: 46rem;
+  margin: 0 auto;
+}
