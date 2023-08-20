@@ -1,7 +1,7 @@
 import './globals.css';
 import styles from './App.module.css';
 import logo from './assets/logo.svg';
-import { TaskInput } from './components/TaskInput';
+import { TaskBoard } from './components/TaskBoard';
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
         </h1>
       </header>
       <main className={styles.container}>
-        <TaskInput />
+        <TaskBoard />
       </main>
     </>
   );

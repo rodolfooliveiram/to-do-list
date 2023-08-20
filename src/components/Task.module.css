@@ -1,0 +1,7 @@
+.task {
+  color: var(--gray-100);
+}
+
+.task input[type='checkbox']:checked + p {
+  text-decoration: line-through;
+}
