@@ -14,7 +14,17 @@ export function TaskBoard() {
     content: '',
   });
 
-  const [taskList, setTaskList] = useState<TaskType[]>([]);
+  const [taskList, setTaskList] = useState<TaskType[]>([
+    {
+      isTaskCompleted: false,
+      content:
+        'Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.',
+    },
+    {
+      isTaskCompleted: false,
+      content: 'Libero auctor neque turpis turpis semper.',
+    },
+  ]);
 
   const isTaskContentEmpty = newTask.content.length == 0;
 
@@ -36,14 +46,6 @@ export function TaskBoard() {
   }
 
   function handleSetTaskCompleted(taskCompleted: boolean, taskContent: string) {
-    // const tempTaskList = taskList.map((task) => {
-    //   if (task.content == taskContent) {
-    //     task.isTaskCompleted = !taskCompleted;
-    //   }
-    //   return task;
-    // });
-    // setTaskList([...tempTaskList]);
-
     const updatedTaskList = taskList.filter((task) => {
       if (task.content !== taskContent) {
         return task;
@@ -56,11 +58,6 @@ export function TaskBoard() {
     };
 
     updatedTaskList.push(updatedTask);
-
-    // updatedTaskList.sort(
-    //   (taskA, taskB) =>
-    //     Number(taskA.isTaskCompleted) - Number(taskB.isTaskCompleted)
-    // );
 
     const orderedAndUpdatedTaskList = orderTaskList(updatedTaskList);
 
@@ -104,7 +101,11 @@ export function TaskBoard() {
         <ul>
           {taskList.map((task) => {
             return (
-              <Task task={task} onSetTaskCompleted={handleSetTaskCompleted} />
+              <Task
+                key={taskList.indexOf(task)}
+                task={task}
+                onSetTaskCompleted={handleSetTaskCompleted}
+              />
             );
           })}
         </ul>
