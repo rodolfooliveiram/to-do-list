@@ -45,7 +45,7 @@ export function TaskBoard() {
     );
   }
 
-  function handleSetTaskCompleted(taskCompleted: boolean, taskContent: string) {
+  function setTaskCompleted(taskCompleted: boolean, taskContent: string) {
     const updatedTaskList = taskList.filter((task) => {
       if (task.content !== taskContent) {
         return task;
@@ -62,6 +62,16 @@ export function TaskBoard() {
     const orderedAndUpdatedTaskList = orderTaskList(updatedTaskList);
 
     setTaskList([...orderedAndUpdatedTaskList]);
+  }
+
+  function deleteTask(taskContent: string) {
+    const updatedTaskList = taskList.filter((task) => {
+      if (task.content !== taskContent) {
+        return task;
+      }
+    });
+
+    setTaskList(updatedTaskList);
   }
 
   return (
@@ -84,10 +94,20 @@ export function TaskBoard() {
 
       <div className={styles.taskOverview}>
         <p className={styles.createdTasksCounter}>
-          Tarefas Criadas<span>0</span>
+          Tarefas Criadas<span>{taskList.length}</span>
         </p>
         <p className={styles.tasksDoneCounter}>
-          Concluídas<span>0</span>
+          Concluídas
+          <span>
+            {
+              taskList.filter((task) => {
+                if (task.isTaskCompleted) {
+                  return task;
+                }
+              }).length
+            }{' '}
+            de {taskList.length}
+          </span>
         </p>
       </div>
 
@@ -104,7 +124,8 @@ export function TaskBoard() {
               <Task
                 key={taskList.indexOf(task)}
                 task={task}
-                onSetTaskCompleted={handleSetTaskCompleted}
+                onSetTaskCompleted={setTaskCompleted}
+                onDeleteTask={deleteTask}
               />
             );
           })}
